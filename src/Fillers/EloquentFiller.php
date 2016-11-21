@@ -13,7 +13,7 @@ class EloquentFiller implements FillerInterface
     /**
      * Fill the results hists into Model.
      *
-     * @param Model  $model
+     * @param Model $model
      * @param Result $result
      *
      * @return mixed|void
@@ -73,8 +73,8 @@ class EloquentFiller implements FillerInterface
     /**
      * Fill a model with form an elastic hit.
      *
-     * @param Model    $model
-     * @param array    $attributes
+     * @param Model $model
+     * @param array $attributes
      * @param Relation $parentRelation
      *
      * @return mixed
@@ -119,10 +119,14 @@ class EloquentFiller implements FillerInterface
                             $models = null;
                         } else {
 
-                          // Check if the relation field is single model or collections
-                          if (!$multiLevelRelation = $this->isMultiLevelArray($value)) {
-                              $value = [$value];
-                          }
+                            // Check if the relation field is single model or collections
+
+                            //fix bug
+                            if(!is_array($value)) $value = [$value];
+
+                            if (!$multiLevelRelation = $this->isMultiLevelArray($value)) {
+                                $value = [$value];
+                            }
 
                             $models = $this->hydrateRecursive($relation->getModel(), $value, $relation);
 
@@ -146,9 +150,9 @@ class EloquentFiller implements FillerInterface
     /**
      * Create a collection of models from plain arrays recursive.
      *
-     * @param Model    $model
+     * @param Model $model
      * @param Relation $parentRelation
-     * @param array    $items
+     * @param array $items
      *
      * @return Collection
      */
@@ -166,7 +170,7 @@ class EloquentFiller implements FillerInterface
     /**
      * Get the pivot attribute from a model.
      *
-     * @param \Illuminate\Database\Eloquent\Model              $model
+     * @param \Illuminate\Database\Eloquent\Model $model
      * @param \Illuminate\Database\Eloquent\Relations\Relation $parentRelation
      */
     public function loadPivotAttribute(Model $model, Relation $parentRelation = null)
