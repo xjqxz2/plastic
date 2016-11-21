@@ -30,12 +30,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Sleimanx2\\Plastic\\": "src/"
+      "Xjqxz2\\Plastic\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Sleimanx2\\Plastic\\Tests\\": "tests/"
+      "Xjqxz2\\Plastic\\Tests\\": "tests/"
     }
   }
 }
